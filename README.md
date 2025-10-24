@@ -1,4 +1,11 @@
 # IfG data app
+
+## Development
+Three branches exist:
+- `production`: Production branch, hosting the live app
+- `staging`: Staging branch, hosting the pre-production version of the app
+- `development`: Development branch, hosting the latest development version of the app
+
 ## Authentication
 The app uses Microsoft Entra authentication, following [Streamlit's guide to implementing this](https://docs.streamlit.io/develop/tutorials/authentication/microsoft).
 
