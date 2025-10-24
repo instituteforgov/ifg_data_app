@@ -4,10 +4,10 @@ import pandas as pd
 import streamlit as st
 from st_aggrid import AgGrid, JsCode, StAggridTheme
 
-from streamlit_testing.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
-import streamlit_testing.pages.dashboard.web_metrics.config as config
-import streamlit_testing.pages.dashboard.web_metrics.elements as elements
-from streamlit_testing.pages.dashboard.web_metrics.utils import format_integer, format_percentage, set_metrics
+from ifg_data_app.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
+import ifg_data_app.pages.dashboard.web_metrics.config as config
+import ifg_data_app.pages.dashboard.web_metrics.elements as elements
+from ifg_data_app.pages.dashboard.web_metrics.utils import format_integer, format_percentage, set_metrics
 
 # HANDLE DIRECT ACCESS
 if "url" not in st.query_params:
@@ -27,7 +27,7 @@ METRIC_TYPE = "download"
 connection = elements.connect_database()
 
 # LOAD DATE RANGE DATA
-with open("streamlit_testing/sql/dashboard/web_metrics/date_range.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/date_range.sql", "r") as file:
     script_date_range = file.read()
 
 df_date_range = elements.load_data(
@@ -36,7 +36,7 @@ df_date_range = elements.load_data(
 )
 
 # LOAD DATA
-with open("streamlit_testing/sql/dashboard/web_metrics/publication_detail.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/publication_detail.sql", "r") as file:
     script = file.read()
 
 script_content_metadata = script.split(";")[0]

@@ -2,8 +2,8 @@ import os
 
 import streamlit as st
 
-from streamlit_testing.pages.dashboard.web_metrics.definitions import DEFINITIONS
-import streamlit_testing.pages.dashboard.web_metrics.elements as elements
+from ifg_data_app.pages.dashboard.web_metrics.definitions import DEFINITIONS
+import ifg_data_app.pages.dashboard.web_metrics.elements as elements
 
 # DRAW PAGE HEADER
 st.title("Frequently asked questions")
@@ -17,7 +17,7 @@ DEFINITIONS = "\n\n".join(
 )
 
 # PAGE CONTENT
-with open("streamlit_testing/pages/dashboard/web_metrics/pages/md/help_faqs.md", "r", encoding="utf-8") as file:
+with open("ifg_data_app/pages/dashboard/web_metrics/pages/md/help_faqs.md", "r", encoding="utf-8") as file:
     content = file.read()
 
 tab1, tab2 = st.tabs(["FAQs", "Definitions"])

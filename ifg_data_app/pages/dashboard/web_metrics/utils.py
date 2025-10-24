@@ -1,26 +1,26 @@
 from st_aggrid import JsCode
 
-import streamlit_testing.pages.dashboard.web_metrics.config as config
+import ifg_data_app.pages.dashboard.web_metrics.config as config
 
-with open("streamlit_testing/js/format_date.js", "r") as f:
+with open("ifg_data_app/js/format_date.js", "r") as f:
     script = f.read()
     format_date = JsCode(script)
-with open("streamlit_testing/js/format_decimal.js", "r") as f:
+with open("ifg_data_app/js/format_decimal.js", "r") as f:
     script = f.read()
     format_decimal = JsCode(script)
-with open("streamlit_testing/js/format_integer.js", "r") as f:
+with open("ifg_data_app/js/format_integer.js", "r") as f:
     script = f.read()
     format_integer = JsCode(script)
-with open("streamlit_testing/js/format_percentage.js", "r") as f:
+with open("ifg_data_app/js/format_percentage.js", "r") as f:
     script = f.read()
     format_percentage = JsCode(script)
-with open("streamlit_testing/js/format_time.js", "r") as f:
+with open("ifg_data_app/js/format_time.js", "r") as f:
     script = f.read()
     format_time = JsCode(script)
-with open("streamlit_testing/js/sort_dates_comparator.js", "r") as f:
+with open("ifg_data_app/js/sort_dates_comparator.js", "r") as f:
     script = f.read()
     sort_dates = JsCode(script)
-with open("streamlit_testing/js/filter_dates_comparator.js", "r") as f:
+with open("ifg_data_app/js/filter_dates_comparator.js", "r") as f:
     script = f.read()
     filter_dates = JsCode(script)
 

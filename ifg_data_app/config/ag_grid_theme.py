@@ -1,4 +1,4 @@
-from streamlit_testing.config.colours import COLOURS
+from ifg_data_app.config.colours import COLOURS
 
 # AG Grid height calculation constants
 # NB: These are best-guess values and aren't exactly that used by the AG Grid component

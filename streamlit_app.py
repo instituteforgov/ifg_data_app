@@ -1,7 +1,7 @@
 import argparse
 
 import streamlit as st
-import streamlit_testing.pages.dashboard.web_metrics.config as config
+import ifg_data_app.pages.dashboard.web_metrics.config as config
 
 
 def parse_redact_data_config():
@@ -36,42 +36,42 @@ pg = st.navigation(
     {
         "Analytics dashboard": [
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/home.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/home.py",
                 title="Home",
                 url_path="/web_metrics_home",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/summary.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/summary.py",
                 title="Summary",
                 url_path="/web_metrics_summary",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/publications.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/publications.py",
                 title="Publications",
                 url_path="/web_metrics_publications",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/publication_detail.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/publication_detail.py",
                 title="Publication detail",
                 url_path="/web_metrics_publication_detail",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/pages.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/pages.py",
                 title="Pages",
                 url_path="/web_metrics_pages",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/page_detail.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/page_detail.py",
                 title="Page detail",
                 url_path="/web_metrics_page_detail",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/roadmap.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/roadmap.py",
                 title="Roadmap",
                 url_path="/web_metrics_roadmap",
             ),
             st.Page(
-                "streamlit_testing/pages/dashboard/web_metrics/pages/help.py",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/help.py",
                 title="Help",
                 url_path="/web_metrics_help",
             ),

@@ -9,16 +9,16 @@ from sqlalchemy import engine, exc
 from st_aggrid import GridOptionsBuilder, JsCode
 import streamlit as st
 
-from streamlit_testing.config.ag_grid_theme import (
+from ifg_data_app.config.ag_grid_theme import (
     AG_GRID_ROW_HEIGHT, AG_GRID_HEADER_HEIGHT,
     AG_GRID_MIN_HEIGHT, AG_GRID_MAX_HEIGHT
 )
-from streamlit_testing.config.colours import COLOURS
-import streamlit_testing.pages.dashboard.web_metrics.config as config
-from streamlit_testing.pages.dashboard.web_metrics.chart_annotations import CHART_ANNOTATIONS
-from streamlit_testing.pages.dashboard.web_metrics.definitions import DEFINITIONS
-from streamlit_testing.pages.dashboard.web_metrics.notes import NOTES
-from streamlit_testing.pages.dashboard.web_metrics.utils import (
+from ifg_data_app.config.colours import COLOURS
+import ifg_data_app.pages.dashboard.web_metrics.config as config
+from ifg_data_app.pages.dashboard.web_metrics.chart_annotations import CHART_ANNOTATIONS
+from ifg_data_app.pages.dashboard.web_metrics.definitions import DEFINITIONS
+from ifg_data_app.pages.dashboard.web_metrics.notes import NOTES
+from ifg_data_app.pages.dashboard.web_metrics.utils import (
     filter_dates, format_date, sort_dates
 )
 

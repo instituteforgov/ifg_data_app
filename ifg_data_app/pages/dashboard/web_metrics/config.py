@@ -1,4 +1,4 @@
-from streamlit_testing.pages.dashboard.web_metrics.utils import (
+from ifg_data_app.pages.dashboard.web_metrics.utils import (
     format_integer, format_decimal, format_percentage, format_time
 )
 

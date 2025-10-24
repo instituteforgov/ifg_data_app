@@ -3,10 +3,10 @@ import os
 import streamlit as st
 from st_aggrid import AgGrid, JsCode, StAggridTheme
 
-from streamlit_testing.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
-import streamlit_testing.pages.dashboard.web_metrics.config as config
-import streamlit_testing.pages.dashboard.web_metrics.elements as elements
-from streamlit_testing.pages.dashboard.web_metrics.utils import format_integer, set_metrics
+from ifg_data_app.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
+import ifg_data_app.pages.dashboard.web_metrics.config as config
+import ifg_data_app.pages.dashboard.web_metrics.elements as elements
+from ifg_data_app.pages.dashboard.web_metrics.utils import format_integer, set_metrics
 
 # SET METRIC TYPE
 METRIC_TYPE = "web_traffic"
@@ -23,7 +23,7 @@ if config.REDACT_DATA:
 st.title("Summary")
 
 # DRAW DATE RANGE INPUTS
-with open("streamlit_testing/sql/dashboard/web_metrics/date_range.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/date_range.sql", "r") as file:
     script_date_range = file.read()
 
 df_date_range = elements.load_data(
@@ -48,7 +48,7 @@ breakdowns = st.pills(
 breakdowns.sort(key=lambda x: config.BREAKDOWNS.index(x))
 
 # LOAD PAGE DATA
-with open("streamlit_testing/sql/dashboard/web_metrics/summary.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/summary.sql", "r") as file:
     script = file.read()
 
 df = elements.load_data(

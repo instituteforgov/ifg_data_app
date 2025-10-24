@@ -3,11 +3,11 @@ import os
 import streamlit as st
 from st_aggrid import AgGrid, JsCode, StAggridTheme
 
-from streamlit_testing.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
-import streamlit_testing.pages.dashboard.web_metrics.config as config
-import streamlit_testing.pages.dashboard.web_metrics.elements as elements
-from streamlit_testing.pages.dashboard.web_metrics.notes import NOTES
-from streamlit_testing.pages.dashboard.web_metrics.utils import format_integer, format_percentage
+from ifg_data_app.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
+import ifg_data_app.pages.dashboard.web_metrics.config as config
+import ifg_data_app.pages.dashboard.web_metrics.elements as elements
+from ifg_data_app.pages.dashboard.web_metrics.notes import NOTES
+from ifg_data_app.pages.dashboard.web_metrics.utils import format_integer, format_percentage
 
 # SET CONSTANTS
 TAB_CONFIG = {
@@ -15,7 +15,7 @@ TAB_CONFIG = {
         {
             "display_name": "Publication page views and downloads",
             "content_type": "Publication",
-            "sql_script": "streamlit_testing/sql/dashboard/web_metrics/home_publications.sql",
+            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_publications.sql",
             "metrics": {
                 "Page views (pages downloadable from)": format_integer,
                 "Downloads": format_integer,
@@ -33,7 +33,7 @@ TAB_CONFIG = {
         {
             "display_name": "Comment page views",
             "content_type": "Comment",
-            "sql_script": "streamlit_testing/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
+            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
             "metrics": {"Page views": format_integer},
             "title_column": "Page title",
             "internal_link_type": "page",
@@ -45,7 +45,7 @@ TAB_CONFIG = {
         {
             "display_name": "Explainer page views",
             "content_type": "Explainer",
-            "sql_script": "streamlit_testing/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
+            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
             "metrics": {"Page views": format_integer},
             "title_column": "Page title",
             "internal_link_type": "page",
@@ -59,7 +59,7 @@ TAB_CONFIG = {
         {
             "display_name": "Event page views",
             "content_type": "Event",
-            "sql_script": "streamlit_testing/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
+            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
             "metrics": {"Page views": format_integer},
             "title_column": "Page title",
             "internal_link_type": "page",
@@ -76,7 +76,7 @@ TAB_CONFIG = {
 connection = elements.connect_database()
 
 # LOAD DATE RANGE DATA
-with open("streamlit_testing/sql/dashboard/web_metrics/date_range.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/date_range.sql", "r") as file:
     script_date_range = file.read()
 
 df_date_range = elements.load_data(

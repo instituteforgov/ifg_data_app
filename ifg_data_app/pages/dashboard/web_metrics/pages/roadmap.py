@@ -1,6 +1,6 @@
 import streamlit as st
 
-import streamlit_testing.pages.dashboard.web_metrics.elements as elements
+import ifg_data_app.pages.dashboard.web_metrics.elements as elements
 
 # DRAW PAGE HEADER
 st.title("Roadmap")
@@ -30,7 +30,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.header("Done")
 
-    with open("streamlit_testing/pages/dashboard/web_metrics/pages/md/roadmap/done.md", "r", encoding="utf-8") as file:
+    with open("ifg_data_app/pages/dashboard/web_metrics/pages/md/roadmap/done.md", "r", encoding="utf-8") as file:
         done = file.read()
 
     display_markdown_containers(done, delimiter="###", border=True)
@@ -38,7 +38,7 @@ with col1:
 with col2:
     st.header("Doing")
 
-    with open("streamlit_testing/pages/dashboard/web_metrics/pages/md/roadmap/doing.md", "r", encoding="utf-8") as file:
+    with open("ifg_data_app/pages/dashboard/web_metrics/pages/md/roadmap/doing.md", "r", encoding="utf-8") as file:
         doing = file.read()
 
     display_markdown_containers(doing, delimiter="###", border=True)
@@ -46,7 +46,7 @@ with col2:
 with col3:
     st.header("Future (indicative)")
 
-    with open("streamlit_testing/pages/dashboard/web_metrics/pages/md/roadmap/future.md", "r", encoding="utf-8") as file:
+    with open("ifg_data_app/pages/dashboard/web_metrics/pages/md/roadmap/future.md", "r", encoding="utf-8") as file:
         future = file.read()
 
     display_markdown_containers(future, delimiter="###", border=True)

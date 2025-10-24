@@ -27,7 +27,7 @@ Hosted on Streamlit Community Cloud at [https://instituteforgovernment.streamlit
 ├── docs/
 │   ├── design_notes.md
 │
-├── streamlit_testing/
+├── ifg_data_app/
 |   ├── config/        <<< Variables used app-wide
 |   │   ├── ag_grid_theme.py
 |   │   ├── colours.py

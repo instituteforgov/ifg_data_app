@@ -204,5 +204,5 @@ secrets.toml
 temp.py
 todo.txt
 
-# XXX temp
-streamlit_testing/sql/dashboard/web_metrics/edited
+# Temp
+ifg_data_app/sql/dashboard/web_metrics/edited
