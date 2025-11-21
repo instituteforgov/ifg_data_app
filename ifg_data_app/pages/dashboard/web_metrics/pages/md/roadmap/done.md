@@ -1,3 +1,6 @@
+### v1.1.0 - Fri 21 November
+🖊️ **UI: Bring live blogs into the Home page**
+
 ### v1.0.2 - Thur 4 September
 🐛 **DATA: Fix bug: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**
 A bug relating to file extensions led to overstatement for these two publication
