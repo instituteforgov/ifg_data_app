@@ -31,8 +31,8 @@ TAB_CONFIG = {
             "width": "full",
         },
         {
-            "display_name": "Comment page views",
-            "content_type": "Comment",
+            "display_name": "Comment and live blog page views",
+            "content_type": ("Comment", "Live blog"),
             "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
             "metrics": {"Page views": format_integer},
             "title_column": "Page title",
@@ -130,18 +130,43 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         published_start_date = start_date
         published_end_date = end_date
 
-    if table_config["content_type"] == "Publication":
-        df = elements.load_data(
-            script,
-            connection,
-            (start_date, end_date, start_date, end_date, table_config["content_type"], published_start_date, published_end_date, published_start_date, published_end_date),
-        )
+    # Handle multiple content types by modifying SQL dynamically
+    content_type = table_config["content_type"]
+    if isinstance(content_type, tuple) and len(content_type) > 1:
+        # For multiple content types, replace = ? with IN clause
+        placeholders = ", ".join(["?" for _ in content_type])
+        script = script.replace("bm.content_type = ?", f"bm.content_type in ({placeholders})")
+        content_type_params = content_type
     else:
-        df = elements.load_data(
-            script,
-            connection,
-            (start_date, end_date, table_config["content_type"], published_start_date, published_end_date, published_start_date, published_end_date),
-        )
+        # For single content type, use as-is
+        content_type_params = content_type[0] if isinstance(content_type, tuple) else content_type
+
+    if (table_config["content_type"] == "Publication" or "Publication" in table_config["content_type"]):
+        if isinstance(content_type_params, tuple):
+            df = elements.load_data(
+                script,
+                connection,
+                (start_date, end_date, start_date, end_date, *content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
+            )
+        else:
+            df = elements.load_data(
+                script,
+                connection,
+                (start_date, end_date, start_date, end_date, content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
+            )
+    else:
+        if isinstance(content_type_params, tuple):
+            df = elements.load_data(
+                script,
+                connection,
+                (start_date, end_date, *content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
+            )
+        else:
+            df = elements.load_data(
+                script,
+                connection,
+                (start_date, end_date, content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
+            )
 
     # EDIT DATA
     if table_config["content_type"] == "Publication":
@@ -240,7 +265,7 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
     # Create the AgGrid table
     AgGrid(
         df,
-        key=f"ag_{table_config['content_type'].lower()}_{table_config['sql_script'].replace('.sql', '')}_{tab_index}",
+        key=f"ag_{table_config['content_type']}_{table_config['sql_script'].replace('.sql', '')}_{tab_index}",
         license_key=os.environ["AG_GRID_LICENCE_KEY"],
         enable_enterprise_modules="enterpriseOnly",
         gridOptions=grid_options,
