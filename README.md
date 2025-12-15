@@ -1,4 +1,11 @@
 # IfG data app
+
+## Development
+Three branches exist:
+- `production`: Production branch, hosting the live app (https://instituteforgovernment.streamlit.app/)
+- `staging`: Staging branch, hosting the pre-production version of the app (https://instituteforgovernment-stage.streamlit.app/: NB: URL pattern, [as `staging` can't be used in Streamlit Community Cloud app URLs](https://discuss.streamlit.io/t/app-url-restrictions/119868))
+- `development`: Development branch, hosting the latest development version of the app
+
 ## Authentication
 The app uses Microsoft Entra authentication, following [Streamlit's guide to implementing this](https://docs.streamlit.io/develop/tutorials/authentication/microsoft).
 
