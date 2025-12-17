@@ -1,12 +1,16 @@
+### v1.1.1 - Wed 17 December
+🦟 **DATA: Bugfix: Strip out small number of publications that appeared twice**
+This affected ~30 publications where the file had been updated and the update was in a different month to the original upload
+
 ### v1.1.0 - Fri 21 November
 🖊️ **UI: Bring live blogs into the Home page**
 
 ### v1.0.2 - Thur 4 September
-🐛 **DATA: Fix bug: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**
+🐛 **DATA: Bugfix: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**
 A bug relating to file extensions led to overstatement for these two publication
 
 ### v1.0.1 - Fri 15 August
-🐛 **DATA: Fix bug: Certain comment pieces and explainers weren't eligible for inclusion in the Home page**\
+🐛 **DATA: Bugfix: Certain comment pieces and explainers weren't eligible for inclusion in the Home page**\
 Fix makes those deleted or changed to a new URL eligible for inclusion
 
 📆 **UI: Restructure Roadmap**
@@ -32,7 +36,7 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 
 🧹 **UI: Remove unused 'Publication details' and 'Page details' tabs ('Traffic sources', 'Search term')**
 
-🐞 **DATA: Fix bug: Strip out duplicate page views for pages with 2+ downloadable files**
+🐞 **DATA: Bugfix: Strip out duplicate page views for pages with 2+ downloadable files**
 
 🅰️ **UI: Drop font size**
 
@@ -41,7 +45,7 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 ### v0.6.0 - Wed 16 July
 📝 **UI: Clarify 'Page detail', 'Publication detail' page titles**
 
-🪲 **UI: Fix bug: zeroes not shown in line charts**
+🪲 **UI: Bugfix: zeroes not shown in line charts**
 
 🚦 **UI: Add info box where line chart has n/a values**
 
@@ -61,9 +65,9 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 📅 **UI: Retain selected date range when changing pages**
 
 ### v0.4.0 - Mon 14 July
-🐜 **DATA: Fix bug that meant some pages showed with a missing page title**
+🐜 **DATA: Bugfix that meant some pages showed with a missing page title**
 
-📉 **UI: Fix bugs in 'Page detail' page line charts**\
+📉 **UI: Bugfixs in 'Page detail' page line charts**\
 Ensures axis ranges are always fixed and only data for the last 48 hours is marked as provisional
 
 ### v0.3.0 - Fri 11 July
@@ -95,7 +99,7 @@ Right-clicking allows copying and export to Excel/CSV
 🔢 **DATA: Improve identification of publication titles in 'Home', 'Publications' pages**\
 Outputs are now given the name of the page from which most downloads have occurred
 
-🐛 **DATA: Fix bug that meant certain links to publication files were broken**
+🐛 **DATA: Bugfix that meant certain links to publication files were broken**
 
 ✏️ **UI: Change wording from 'outputs' to 'publications' throughout dashboard**
 
