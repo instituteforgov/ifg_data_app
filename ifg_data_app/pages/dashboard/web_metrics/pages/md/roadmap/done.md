@@ -1,12 +1,12 @@
 ### v1.1.1 - Wed 17 December
-🦟 **DATA: Bugfix: Strip out small number of publications that appeared twice**
+🦟 **DATA: Bugfix: Strip out small number of publications that appeared twice**\
 This affected ~30 publications where the file had been updated and the update was in a different month to the original upload
 
 ### v1.1.0 - Fri 21 November
 🖊️ **UI: Bring live blogs into the Home page**
 
 ### v1.0.2 - Thur 4 September
-🐛 **DATA: Bugfix: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**
+🐛 **DATA: Bugfix: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**\
 A bug relating to file extensions led to overstatement for these two publication
 
 ### v1.0.1 - Fri 15 August
