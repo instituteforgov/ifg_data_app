@@ -9,6 +9,13 @@ Three branches exist:
 ## Authentication
 The app uses Microsoft Entra authentication, following [Streamlit's guide to implementing this](https://docs.streamlit.io/develop/tutorials/authentication/microsoft).
 
+A separate set of secrets exists for each of these environments:
+- Production environment on Streamlit Community Cloud
+- Staging environment on Streamlit Community Cloud
+- Local development
+
+This is because the `redirect_uri` differs for each of these environments, and different secrets are needed for each `redirect_uri`.
+
 The identity app registration that has been created has an expiry date: 3 April 2027.
 
 ## Serving the app
