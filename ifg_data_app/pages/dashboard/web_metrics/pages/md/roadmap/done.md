@@ -1,5 +1,5 @@
 ### v1.1.2 - Tu 27 Jan 2026
-📈 **DATA: Bugfix: Last two day's data always shown as provisional**\
+📈 **UI: Bugfix: Last two day's data always shown as provisional**\
 This applied even where a custom range was applied, covering non-recent dates
 
 ### v1.1.1 - Wed 17 December 2025
