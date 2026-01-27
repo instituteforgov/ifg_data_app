@@ -395,7 +395,7 @@ def draw_line_chart_section(
     Notes:
     - fixedrange=True is required to disable zooming
     - y-axis range is extended slightly beyond the highest value to force plotly to draw a gridline - it won't draw a gridline at the edge of the chart
-    - Final 48 hours are marked as being provisional
+    - Final 48 hours are marked as being provisional only when the chart range includes data up to the present date (within last 48 hours)
     """
 
     with st.container(
@@ -443,14 +443,26 @@ def draw_line_chart_section(
         # NB: Data segments need to contain two or more points in order for a line to be
         # drawn
         df_chart_sorted = df_chart.sort_values(x)
-        end_date_minus_1_day = pd.to_datetime(end_date) - pd.Timedelta(days=1)
-        end_date_minus_2_days = pd.to_datetime(end_date) - pd.Timedelta(days=2)
 
-        df_final = df_chart_sorted[df_chart_sorted[x] <= end_date_minus_2_days]
-        df_finalprovisional = df_chart_sorted[
-            df_chart_sorted[x].isin([end_date_minus_2_days, end_date_minus_1_day])
-        ]
-        df_provisional = df_chart_sorted[df_chart_sorted[x] >= end_date_minus_1_day]
+        # Check if end_date is within the last 48 hours from today
+        today = date.today()
+        days_from_today = (today - end_date).days
+        show_provisional = days_from_today <= 2
+
+        if show_provisional:
+            end_date_minus_1_day = pd.to_datetime(end_date) - pd.Timedelta(days=1)
+            end_date_minus_2_days = pd.to_datetime(end_date) - pd.Timedelta(days=2)
+
+            df_final = df_chart_sorted[df_chart_sorted[x] <= end_date_minus_2_days]
+            df_finalprovisional = df_chart_sorted[
+                df_chart_sorted[x].isin([end_date_minus_2_days, end_date_minus_1_day])
+            ]
+            df_provisional = df_chart_sorted[df_chart_sorted[x] >= end_date_minus_1_day]
+        else:
+            # When not showing recent data, all data is treated as final
+            df_final = df_chart_sorted
+            df_finalprovisional = pd.DataFrame()
+            df_provisional = pd.DataFrame()
 
         # Create figure with go.Figure for more control
         fig = go.Figure()

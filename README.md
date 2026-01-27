@@ -3,11 +3,18 @@
 ## Development
 Three branches exist:
 - `production`: Production branch, hosting the live app (https://instituteforgovernment.streamlit.app/)
-- `staging`: Staging branch, hosting the pre-production version of the app (https://instituteforgovernment-stage.streamlit.app/: NB: URL pattern, [as `staging` can't be used in Streamlit Community Cloud app URLs](https://discuss.streamlit.io/t/app-url-restrictions/119868))
+- `staging`: Staging branch, hosting the pre-production version of the app (https://instituteforgovernment-stage.streamlit.app/: NB: Note URL pattern, [as `staging` can't be used in Streamlit Community Cloud app URLs](https://discuss.streamlit.io/t/app-url-restrictions/119868))
 - `development`: Development branch, hosting the latest development version of the app
 
 ## Authentication
 The app uses Microsoft Entra authentication, following [Streamlit's guide to implementing this](https://docs.streamlit.io/develop/tutorials/authentication/microsoft).
+
+A separate set of secrets exists for each of these environments:
+- Production environment on Streamlit Community Cloud
+- Staging environment on Streamlit Community Cloud
+- Local development
+
+This is because the `redirect_uri` differs for each of these environments, and different secrets are needed for each `redirect_uri`.
 
 The identity app registration that has been created has an expiry date: 3 April 2027.
 
