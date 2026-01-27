@@ -1,27 +1,31 @@
-### v1.1.1 - Wed 17 December
+### v1.1.2 - Tu 27 Jan 2026
+📈 **DATA: Bugfix: Last two day's data always shown as provisional**\
+This applied even where a custom range was applied, covering non-recent dates
+
+### v1.1.1 - Wed 17 December 2025
 🦟 **DATA: Bugfix: Strip out small number of publications that appeared twice**\
 This affected ~30 publications where the file had been updated and the update was in a different month to the original upload
 
-### v1.1.0 - Fri 21 November
+### v1.1.0 - Fri 21 November 2025
 🖊️ **UI: Bring live blogs into the Home page**
 
-### v1.0.2 - Thur 4 September
+### v1.0.2 - Thur 4 September 2025
 🐛 **DATA: Bugfix: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**\
 A bug relating to file extensions led to overstatement for these two publication
 
-### v1.0.1 - Fri 15 August
+### v1.0.1 - Fri 15 August 2025
 🐛 **DATA: Bugfix: Certain comment pieces and explainers weren't eligible for inclusion in the Home page**\
 Fix makes those deleted or changed to a new URL eligible for inclusion
 
 📆 **UI: Restructure Roadmap**
 
-### v1.0.0 - Mon 21 July
+### v1.0.0 - Mon 21 July 2025
 🚀 **Launch**
 
-### v0.8.0 - Mon 21 July
+### v0.8.0 - Mon 21 July 2025
 ❔ **UI: Update FAQs description of downloads**
 
-### v0.7.0 - Fri 18 July
+### v0.7.0 - Fri 18 July 2025
 ❓ **UI: Add more questions to 'Help' page**
 
 🪟 **UI: Set sidebar to always start expanded**
@@ -42,14 +46,14 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 
 💁 **UI: Add definitions to 'Help' page**
 
-### v0.6.0 - Wed 16 July
+### v0.6.0 - Wed 16 July 2025
 📝 **UI: Clarify 'Page detail', 'Publication detail' page titles**
 
 🪲 **UI: Bugfix: zeroes not shown in line charts**
 
 🚦 **UI: Add info box where line chart has n/a values**
 
-### v0.5.0 - Tu 15 July
+### v0.5.0 - Tu 15 July 2025
 💁 **UI: Add help button explaining minimum date in date range selectors**
 
 ⚠️ **UI: Implement range highlights and annotations on line charts**
@@ -64,13 +68,13 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 
 📅 **UI: Retain selected date range when changing pages**
 
-### v0.4.0 - Mon 14 July
+### v0.4.0 - Mon 14 July 2025
 🐜 **DATA: Bugfix that meant some pages showed with a missing page title**
 
 📉 **UI: Bugfixs in 'Page detail' page line charts**\
 Ensures axis ranges are always fixed and only data for the last 48 hours is marked as provisional
 
-### v0.3.0 - Fri 11 July
+### v0.3.0 - Fri 11 July 2025
 💻 **UI: Add extra rule to hide sidebar button on 'Page detail' page**
 
 💄 **UI: Improve presentation of 'Page detail' page**
@@ -103,7 +107,7 @@ Outputs are now given the name of the page from which most downloads have occurr
 
 ✏️ **UI: Change wording from 'outputs' to 'publications' throughout dashboard**
 
-### v0.2.0 - Wed 9 July
+### v0.2.0 - Wed 9 July 2025
 ➡️ **UI: Improve allocation of historic content to teams**
 
 ⏰ **UI: Add badges giving latest update dates**
@@ -116,7 +120,7 @@ Remove '_1', '_v1' etc. from publication filenames
 🗃️ **UI: Display publication filenames in 'Home', 'Publications' pages**\
 Allowing related files (e.g. main publication and briefing document) to be distinguished
 
-### v0.1.0 - Tu 8 July
+### v0.1.0 - Tu 8 July 2025
 🗓️ **UI: Fix filtering on ‘Published date’, ‘Updated date’ columns in ‘Pages’, ‘Publications’ pages**
 
 ♟️ **UI: Split ‘Other’ and ‘Unclassified’ out as separate content types**
