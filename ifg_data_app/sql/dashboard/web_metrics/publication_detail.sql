@@ -60,7 +60,7 @@ where
 select
     pv.date Date,
     sum(pv.page_views) [Page views (pages downloadable from)],
-    sum(dc2.event_count) Downloads
+    sum(dc2.downloads) Downloads
 from
 (
     select distinct
@@ -97,7 +97,7 @@ select
     dc1.url [Link],
     bm.content_type [Content type],
     sum(pv.page_views) [Page views],
-    sum(dc2.event_count) [Downloads]
+    sum(dc2.downloads) [Downloads]
 from
 (
     select distinct

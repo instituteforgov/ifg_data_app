@@ -103,8 +103,19 @@ def create_internal_link(
     column_defs: dict,
     column: str,
     page_type: str,
+    url_column: str = "Link"
 ) -> dict:
-    """Create internal link column"""
+    """Create internal link column
+
+    Args:
+        column_defs: Dictionary of column definitions
+        column: Column name to apply the link to
+        page_type: Type of page ('page' or 'publication')
+        url_column: Name of the column containing the URL (default: 'Link')
+
+    Returns:
+        Updated column definitions dictionary
+    """
 
     # Determine URL path based on page type
     if page_type == "page":
@@ -119,11 +130,15 @@ def create_internal_link(
                 if (!params.value || params.value === '' || params.value === 'Total') {{
                     this.eGui = document.createElement("span");
                     this.eGui.innerText = params.value || "";
+                // Check if the URL column is empty or null
+                }} else if (!params.data.{url_column} || params.data.{url_column} === '') {{
+                    this.eGui = document.createElement("span");
+                    this.eGui.innerText = params.value;
                 }} else {{
                     this.eGui = document.createElement("a");
                     this.eGui.innerText = params.value;
                     this.eGui.setAttribute(
-                        "href", "{url_path}?url=" + params.data.Link
+                        "href", "{url_path}?url=" + params.data.{url_column}
                     );
                     this.eGui.setAttribute("style", "text-decoration:none; color:{COLOURS['pink']};");
                     this.eGui.setAttribute("target", "_blank");

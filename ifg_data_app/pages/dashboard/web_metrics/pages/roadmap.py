@@ -4,7 +4,7 @@ import ifg_data_app.pages.dashboard.web_metrics.elements as elements
 
 # DRAW PAGE HEADER
 st.title("Roadmap")
-elements.draw_last_updated_badge("2026-01-27")
+elements.draw_last_updated_badge("2026-02-06")
 st.markdown("\n\n")
 st.markdown("\n\n")
 

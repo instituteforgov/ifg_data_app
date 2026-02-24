@@ -6,7 +6,7 @@ select
     da.file_name_clean [File name],
     da.file_path_latest [Link],
     sum(pv.page_views) [Page views (pages downloadable from)],
-    sum(dc2.event_count) Downloads
+    sum(dc2.downloads) Downloads
 from
 (
     select distinct
