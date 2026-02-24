@@ -12,7 +12,7 @@ select
     a.author Author,
     p.topic Topic,
     sum(pv.page_views) [Page views (pages downloadable from)],
-    sum(dc2.event_count) Downloads
+    sum(dc2.downloads) Downloads
 from
 (
     select distinct
