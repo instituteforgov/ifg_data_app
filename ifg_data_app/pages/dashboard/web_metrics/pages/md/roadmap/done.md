@@ -1,5 +1,9 @@
+### v1.2.0 - Fri 6 Feb 2026
+📈 **DATA: Factor in redirects**\
+Where a page has changed URL, merge traffic and download figures and report against the new URL
+
 ### v1.1.2 - Tu 27 Jan 2026
-📈 **DATA: Bugfix: Last two day's data always shown as provisional**\
+📈 **UI: Bugfix: Last two day's data always shown as provisional**\
 This applied even where a custom range was applied, covering non-recent dates
 
 ### v1.1.1 - Wed 17 December 2025
@@ -11,7 +15,7 @@ This affected ~30 publications where the file had been updated and the update wa
 
 ### v1.0.2 - Thur 4 September 2025
 🐛 **DATA: Bugfix: Metrics for Whitehall Monitor 2025 and Performance Tracker 2023 were overstated**\
-A bug relating to file extensions led to overstatement for these two publication
+A bug relating to file extensions led to overstatement for these two publications
 
 ### v1.0.1 - Fri 15 August 2025
 🐛 **DATA: Bugfix: Certain comment pieces and explainers weren't eligible for inclusion in the Home page**\
