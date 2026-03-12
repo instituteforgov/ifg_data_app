@@ -1,3 +1,7 @@
+### v1.2.1 - Wed 11 Mar 2026
+🪳 **DATA: Bugfix: In rare cases publications weren't eligible to appear in home page**\
+Publications where the file name contained the string 'briefing' were erroneously excluded
+
 ### v1.2.0 - Fri 6 Feb 2026
 📈 **DATA: Factor in redirects**\
 Where a page has changed URL, merge traffic and download figures and report against the new URL

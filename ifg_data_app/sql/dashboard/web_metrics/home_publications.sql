@@ -38,7 +38,6 @@ where
     pt.page_title is not null and
     pv.date between ? and ? and
     bm.content_type = ? and
-    da.file_name_clean not like '%briefing%' and
     (
         (
             isnull(bm.published_date, '1900-01-01') >= ? and
