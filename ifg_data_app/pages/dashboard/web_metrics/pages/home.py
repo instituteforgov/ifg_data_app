@@ -40,6 +40,7 @@ TAB_CONFIG = {
             "external_link_column": "Link",
             "external_link_text": "View page ⮺",
             "sort_columns": "Page views",
+            "notes": [NOTES["comment_live_blog_page_views_note"]],
             "width": "half",
         },
         {
