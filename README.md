@@ -110,3 +110,6 @@ NB: Note the use of `--` before the addition of these command line arguments. Th
 
 ## Licences
 An AG Grid licence is held in order to make use of all [`streamlit-aggrid` features](https://github.com/PablocFonseca/streamlit-aggrid). The license is perpetual - i.e. no need for renewal.
+
+## Relationships with other repos
+- [ifg_analytics](https://github.com/instituteforgov/ifg_analytics): The app makes use of data from the `ifg_analytics` repo, which is where web analytics data is extracted, transformed and loaded to our database. The app pulls this data in from the database.
