@@ -31,7 +31,7 @@ df_date_range = elements.load_data(
 # DRAW PAGE HEADER
 if config.REDACT_DATA:
     elements.draw_redact_data_warning()
-st.title("Publications")
+st.title("Files")
 elements.draw_latest_data_badge(df_date_range["max_date"][0])
 st.markdown("\n\n")
 st.markdown("\n\n")
@@ -43,32 +43,40 @@ date_range_option, start_date, end_date = elements.draw_date_range_inputs(
 )
 
 # LOAD PAGE DATA
-with open("ifg_data_app/sql/dashboard/web_metrics/publications.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/files.sql", "r") as file:
     script = file.read()
 
-df = elements.load_data(
-    script,
+script_by_day = script.split(";")[0]
+df_by_day = elements.load_data(
+    script_by_day,
     connection,
-    (start_date, end_date, start_date, end_date),
+    (
+        start_date, end_date,  # page_views_agg
+        start_date, end_date, end_date, start_date,  # page_views_agg_files
+        start_date, end_date,  # downloads_agg
+    ),
+)
+
+script_by_file = script.split(";")[1]
+df_by_file = elements.load_data(
+    script_by_file,
+    connection,
+    (
+        start_date, end_date,  # page_views_agg
+        start_date, end_date, end_date, start_date,  # page_views_agg_files
+        start_date, end_date,  # downloads_agg
+        end_date, start_date,  # where clause
+    ),
 )
 
 # EDIT DATA
-df_by_day = df[["Date"] + METRICS_RAW].groupby("Date").sum().reset_index()
 df_by_day = elements.fill_missing_dates(df_by_day, start_date, end_date, "Date", METRICS_RAW)
-df_by_day = elements.calculate_derived_metrics(df_by_day, METRIC_CALCULATIONS)
 
-df_by_publication = elements.group_df(
-    df=df[config.METRICS_PUBLICATIONS + METRICS_RAW],
-    group_by=config.METRICS_PUBLICATIONS,
-)
-
-df_by_publication = elements.calculate_derived_metrics(df_by_publication, METRIC_CALCULATIONS)
-
-df_by_publication = df_by_publication[config.METRICS_PUBLICATIONS + list(METRICS_DISPLAY.keys())]
+df_by_file = df_by_file[config.METRICS_FILES + list(METRICS_DISPLAY.keys())]
 
 # Convert dates
 for date_col in ["Published date", "Updated date"]:
-    df_by_publication[date_col] = df_by_publication[date_col].apply(
+    df_by_file[date_col] = df_by_file[date_col].apply(
         lambda x: pd.to_datetime(x, errors="coerce") if x != "" else ""
     )
 
@@ -80,13 +88,13 @@ selected_metric = elements.draw_line_chart_section(
     end_date=end_date,
     metrics=list(METRICS_DISPLAY.keys()),
     default_metric=DEFAULT_METRIC,
-    content_type="publications",
+    content_type="files",
     redact_data=config.REDACT_DATA,
 )
 
 # DRAW TABLE
 column_defs, grid_options = elements.set_table_defaults(
-    df=df_by_publication,
+    df=df_by_file,
     metrics=METRICS_DISPLAY,
     sort_columns=DEFAULT_METRIC,
     sort_order={
@@ -94,18 +102,18 @@ column_defs, grid_options = elements.set_table_defaults(
         "Published date": "desc",
         "Updated date": "desc"
     },
-    pin_columns=["Publication title"],
+    pin_columns=["File title"],
 )
 
 column_defs = elements.create_internal_link(
     column_defs,
-    "Publication title",
-    page_type="publication",
+    "File title",
+    page_type="file",
 )
 column_defs = elements.create_external_link(
     column_defs,
     "Link",
-    "View publication ⮺"
+    "View file ⮺"
 )
 column_defs = elements.format_date_cols(
     column_defs,
@@ -121,7 +129,7 @@ else:
         column_defs[metric]["valueFormatter"] = formatter
 
 AgGrid(
-    df_by_publication,
+    df_by_file,
     key="ag",
     license_key=os.environ["AG_GRID_LICENCE_KEY"],
     enable_enterprise_modules="enterpriseOnly",
@@ -129,7 +137,7 @@ AgGrid(
     gridOptions=grid_options,
     allow_unsafe_jscode=True,
     theme=StAggridTheme(base=AG_GRID_THEME_BASE).withParams(**AG_GRID_THEME_DEFAULTS),
-    height=elements.calculate_ag_grid_height(len(df_by_publication)),
+    height=elements.calculate_ag_grid_height(len(df_by_file)),
 )
 
 st.warning(NOTES["downloads_note"]["text"])

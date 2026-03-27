@@ -111,7 +111,6 @@ df_metrics = elements.load_data(
 
 # EDIT DATA
 df_metrics = elements.fill_missing_dates(df_metrics, start_date, end_date, "Date", METRICS_RAW)
-df_metrics = elements.calculate_derived_metrics(df_metrics, METRIC_CALCULATIONS)
 
 df_metrics = df_metrics[
     ["Date"] + list(METRICS_DISPLAY.keys())

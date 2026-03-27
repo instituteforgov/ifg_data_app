@@ -46,14 +46,14 @@ pg = st.navigation(
                 url_path="/web_metrics_summary",
             ),
             st.Page(
-                "ifg_data_app/pages/dashboard/web_metrics/pages/publications.py",
-                title="Publications",
-                url_path="/web_metrics_publications",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/files.py",
+                title="Files (e.g. PDFs)",
+                url_path="/web_metrics_files",
             ),
             st.Page(
-                "ifg_data_app/pages/dashboard/web_metrics/pages/publication_detail.py",
-                title="Publication detail",
-                url_path="/web_metrics_publication_detail",
+                "ifg_data_app/pages/dashboard/web_metrics/pages/file_detail.py",
+                title="File detail",
+                url_path="/web_metrics_file_detail",
             ),
             st.Page(
                 "ifg_data_app/pages/dashboard/web_metrics/pages/pages.py",
@@ -94,8 +94,14 @@ st.markdown(
             }
         </style>
         <style>
-            a[href$="web_metrics_publication_detail"] {
+            a[href$="web_metrics_file_detail"] {
                 display: none;
+            }
+        </style>
+        <style>
+            a[href$="web_metrics_files"],
+            a[href$="web_metrics_pages"] {
+                padding-left: 1.25rem;
             }
         </style>
     """,

@@ -36,7 +36,7 @@ df_date_range = elements.load_data(
 )
 
 # LOAD DATA
-with open("ifg_data_app/sql/dashboard/web_metrics/publication_detail.sql", "r") as file:
+with open("ifg_data_app/sql/dashboard/web_metrics/file_detail.sql", "r") as file:
     script = file.read()
 
 script_content_metadata = script.split(";")[0]
@@ -54,7 +54,7 @@ if df_content_metadata.empty:
 # DRAW PAGE HEADER
 if config.REDACT_DATA:
     elements.draw_redact_data_warning()
-st.title("Publication: _" + df_content_metadata["Publication title"].iloc[0] + "_")
+st.title("File: _" + df_content_metadata["File title"].iloc[0] + "_")
 elements.draw_latest_data_badge(df_date_range["max_date"][0])
 st.markdown("\n\n")
 st.markdown("\n\n")
@@ -66,7 +66,7 @@ else:
 st.markdown("https://www.instituteforgovernment.org.uk" + df_content_metadata["Link"].iloc[0])
 st.markdown("\n\n")
 
-content_metadata = ["Content type", "Publication type", "Published date", "Updated date", "Team", "Topic"]
+content_metadata = ["Content type", "File type", "Published date", "Updated date", "Team", "Topic"]
 
 for date_col in ["Published date", "Updated date"]:
     df_content_metadata[date_col] = pd.to_datetime(
@@ -99,7 +99,7 @@ script_metrics = script.split(";")[1]
 df_metrics = elements.load_data(
     script_metrics,
     connection,
-    (start_date, end_date, st.query_params["url"], start_date, end_date),
+    (start_date, end_date, start_date, end_date, st.query_params["url"], end_date, start_date),
 )
 
 # EDIT DATA
@@ -118,7 +118,7 @@ selected_metric = elements.draw_line_chart_section(
     end_date=end_date,
     metrics=list(METRICS_DISPLAY.keys()),
     default_metric=DEFAULT_METRIC,
-    content_type="publications",
+    content_type="files",
     show_all_content_warning=False,
     redact_data=config.REDACT_DATA,
 )
@@ -173,7 +173,7 @@ with tab2:
     df_downloadable_pages = elements.load_data(
         script_metrics,
         connection,
-        (start_date, end_date, start_date, end_date, st.query_params["url"]),
+        (start_date, end_date, start_date, end_date, st.query_params["url"], end_date, start_date),
     )
 
     # Ensure Downloads column exists and handle null values
@@ -181,12 +181,6 @@ with tab2:
         df_downloadable_pages["Downloads"] = 0
     else:
         df_downloadable_pages["Downloads"] = df_downloadable_pages["Downloads"].fillna(0)
-
-    # Calculate download rate (Downloads / Page views)
-    df_downloadable_pages["Download rate"] = df_downloadable_pages.apply(
-        lambda row: row["Downloads"] / row["Page views"] if row["Page views"] > 0 else 0,
-        axis=1
-    )
 
     # Convert dates
     for date_col in ["Published date", "Updated date"]:
