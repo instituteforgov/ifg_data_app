@@ -73,7 +73,7 @@ for date_col in ["Published date", "Updated date"]:
         df_content_metadata[date_col]
     ).dt.strftime("%d %B %Y")
 
-df_content_metadata = df_content_metadata.fillna("")
+df_content_metadata = df_content_metadata.fillna("").infer_objects(copy=False)
 
 st.markdown(
     df_content_metadata[content_metadata].T.reset_index().style.set_table_styles([
