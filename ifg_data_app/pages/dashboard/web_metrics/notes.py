@@ -5,7 +5,7 @@ NOTES = {
     },
     "downloads_note": {
         "type": "warning",
-        "text": "NB: Downloads doesn't include instances where someone directly accesses a file via a URL. See the FAQs for further details."
+        "text": "NB: Downloads doesn't include instances where someone directly accesses a file via a URL. See the Help page for further details."
     },
     "download_rate_note": {
         "type": "warning",
