@@ -10,68 +10,69 @@ from ifg_data_app.pages.dashboard.web_metrics.notes import NOTES
 from ifg_data_app.pages.dashboard.web_metrics.utils import format_integer, format_percentage
 
 # SET CONSTANTS
-TAB_CONFIG = {
-    "Publications, comments, explainers": [
-        {
-            "display_name": "Publication page views and downloads",
-            "content_type": "Publication",
-            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_publications.sql",
-            "metrics": {
-                "Page views (pages downloadable from)": format_integer,
-                "Downloads": format_integer,
-                "Download rate (pages downloadable from)": format_percentage,
-            },
-            "title_column": "Publication title",
-            "file_name_column": "File name",
-            "internal_link_type": "publication",
-            "external_link_column": "Link",
-            "external_link_text": "View publication ⮺",
-            "sort_columns": "Downloads",
-            "notes": [NOTES["downloads_note"]],
-            "width": "full",
+TABLE_CONFIG = [
+    {
+        "section_header": "Publications",
+        "title": "Downloads",
+        "title_as_subheader": True,
+        "description": "Publications available as PDFs. Page views aggregated across all pages the PDF is downloadable from",
+        "content_type": "Publication",
+        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_downloads.sql",
+        "metrics": {
+            "Page views (pages downloadable from)": format_integer,
+            "Downloads": format_integer,
+            "Download rate (pages downloadable from)": format_percentage,
         },
-        {
-            "display_name": "Comment and live blog page views",
-            "content_type": ("Comment", "Live blog"),
-            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
-            "metrics": {"Page views": format_integer},
-            "title_column": "Page title",
-            "internal_link_type": "page",
-            "external_link_column": "Link",
-            "external_link_text": "View page ⮺",
-            "sort_columns": "Page views",
-            "notes": [NOTES["comment_live_blog_page_views_note"]],
-            "width": "half",
-        },
-        {
-            "display_name": "Explainer page views",
-            "content_type": "Explainer",
-            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
-            "metrics": {"Page views": format_integer},
-            "title_column": "Page title",
-            "internal_link_type": "page",
-            "external_link_column": "Link",
-            "external_link_text": "View page ⮺",
-            "sort_columns": "Page views",
-            "width": "half",
-        }
-    ],
-    "Events": [
-        {
-            "display_name": "Event page views",
-            "content_type": "Event",
-            "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_comments_explainers_events.sql",
-            "metrics": {"Page views": format_integer},
-            "title_column": "Page title",
-            "internal_link_type": "page",
-            "external_link_column": "Link",
-            "external_link_text": "View page ⮺",
-            "sort_columns": "Page views",
-            "notes": [NOTES["event_page_views_note"]],
-            "width": "full",
-        }
-    ]
-}
+        "title_column": "Publication title",
+        "internal_link_type": "file",
+        "external_link_column": "Link",
+        "external_link_text": "View pub... ⮺",
+        "notes": [NOTES["downloads_note"]],
+    },
+    {
+        "title": "Page views",
+        "title_as_subheader": True,
+        "description": "Publications available in HTML format. Page views are disaggregated by page",
+        "content_type": "Publication",
+        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
+        "metrics": {"Page views": format_integer},
+        "title_column": "Page title",
+        "internal_link_type": "page",
+        "external_link_column": "Link",
+        "external_link_text": "View page ⮺",
+    },
+    {
+        "title": "Comment and live blog page views",
+        "content_type": ("Comment", "Live blog"),
+        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
+        "metrics": {"Page views": format_integer},
+        "title_column": "Page title",
+        "internal_link_type": "page",
+        "external_link_column": "Link",
+        "external_link_text": "View page ⮺",
+        "notes": [NOTES["comment_live_blog_page_views_note"]],
+    },
+    {
+        "title": "Explainer page views",
+        "content_type": "Explainer",
+        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
+        "metrics": {"Page views": format_integer},
+        "title_column": "Page title",
+        "internal_link_type": "page",
+        "external_link_column": "Link",
+        "external_link_text": "View page ⮺",
+    },
+    {
+        "title": "Event page views",
+        "content_type": "Event",
+        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
+        "metrics": {"Page views": format_integer},
+        "title_column": "Page title",
+        "internal_link_type": "page",
+        "external_link_column": "Link",
+        "external_link_text": "View page ⮺",
+    },
+]
 
 # CONNECT TO DATABASE
 connection = elements.connect_database()
@@ -94,13 +95,13 @@ st.markdown("\n\n")
 st.markdown("\n\n")
 
 # DRAW DATE RANGE INPUTS
-date_range_option, start_date, end_date = elements.draw_date_range_inputs(
+_, start_date, end_date = elements.draw_date_range_inputs(
     min_date=df_date_range["min_date"][0],
     max_date=df_date_range["max_date"][0],
 )
 
 # # DRAW PAGE FILTER INPUT
-col1, col2 = st.columns([1, 5])
+col1, _ = st.columns([1, 5])
 
 with col1:
     page_filter = st.selectbox(
@@ -111,12 +112,8 @@ with col1:
         key="page_filter",
     )
 
-# CREATE TABS
-tab_names = list(TAB_CONFIG.keys())
-tabs = st.tabs(tab_names)
 
-
-def create_table(table_config, tab_index, page_filter, start_date, end_date, connection, sort_column=None):
+def create_table(table_config, page_filter, start_date, end_date, connection):
     """Create a single table with all the necessary data loading and configuration."""
 
     # LOAD PAGE DATA
@@ -131,31 +128,22 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         published_start_date = start_date
         published_end_date = end_date
 
-    # Handle multiple content types by modifying SQL dynamically
-    content_type = table_config["content_type"]
-    if isinstance(content_type, tuple) and len(content_type) > 1:
-        # For multiple content types, replace = ? with IN clause
-        placeholders = ", ".join(["?" for _ in content_type])
-        script = script.replace("bm.content_type = ?", f"bm.content_type in ({placeholders})")
-        content_type_params = content_type
+    if table_config.get("title") == "Downloads":
+        df = elements.load_data(
+            script,
+            connection,
+            (start_date, end_date, start_date, end_date, end_date, start_date, start_date, end_date, published_start_date, published_end_date, published_start_date, published_end_date),
+        )
     else:
-        # For single content type, use as-is
-        content_type_params = content_type[0] if isinstance(content_type, tuple) else content_type
-
-    if (table_config["content_type"] == "Publication" or "Publication" in table_config["content_type"]):
-        if isinstance(content_type_params, tuple):
-            df = elements.load_data(
-                script,
-                connection,
-                (start_date, end_date, start_date, end_date, *content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
-            )
+        # Handle multiple content types by modifying SQL dynamically
+        content_type = table_config["content_type"]
+        if isinstance(content_type, tuple) and len(content_type) > 1:
+            placeholders = ", ".join(["?" for _ in content_type])
+            script = script.replace("p.content_type = ?", f"p.content_type in ({placeholders})")
+            content_type_params = content_type
         else:
-            df = elements.load_data(
-                script,
-                connection,
-                (start_date, end_date, start_date, end_date, content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
-            )
-    else:
+            content_type_params = content_type[0] if isinstance(content_type, tuple) else content_type
+
         if isinstance(content_type_params, tuple):
             df = elements.load_data(
                 script,
@@ -169,22 +157,6 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
                 (start_date, end_date, content_type_params, published_start_date, published_end_date, published_start_date, published_end_date),
             )
 
-    # EDIT DATA
-    if table_config["content_type"] == "Publication":
-        METRIC_CALCULATIONS = config.DOWNLOAD_METRIC_CALCULATIONS
-        df = elements.calculate_derived_metrics(df, METRIC_CALCULATIONS)
-
-        # Apply sorting and filtering for publications table
-        if sort_column:
-            if sort_column == "Download rate (pages downloadable from)*":
-                df_filtered = df[df["Downloads"] >= 25].copy()
-                if not df_filtered.empty:
-                    df = df_filtered.sort_values("Download rate (pages downloadable from)", ascending=False).head(10)
-                else:
-                    df = df.iloc[0:0]
-            else:
-                df = df.sort_values(sort_column, ascending=False).head(10)
-
     # DRAW TABLE
     column_defs, grid_options = elements.set_table_defaults(
         df=df,
@@ -195,6 +167,9 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         filter=False,
         lockPinned=True,
     )
+
+    # Remove autoSizeStrategy set by GridOptionsBuilder so that flex column widths are honoured
+    grid_options.pop("autoSizeStrategy", None)
 
     column_defs = elements.create_internal_link(
         column_defs,
@@ -208,6 +183,16 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         table_config["external_link_text"]
     )
 
+    # For publication downloads, override the title renderer to append the file name as plain text
+    if table_config.get("internal_link_type") == "file":
+        column_defs = elements.create_internal_link_with_suffix(
+            column_defs,
+            "Publication title",
+            page_type="file",
+            suffix_column="File name",
+        )
+        column_defs["File name"]["hide"] = True
+
     # Apply formatting to metric columns
     if config.REDACT_DATA:
         for metric in table_config["metrics"]:
@@ -216,15 +201,16 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         for metric, formatter in table_config["metrics"].items():
             column_defs[metric]["valueFormatter"] = formatter
 
-    # Set explicit column widths
-    column_defs[table_config["title_column"]]["width"] = 300
-    if "file_name_column" in table_config:
-        column_defs[table_config["file_name_column"]]["width"] = 300
-    column_defs[table_config["external_link_column"]]["width"] = 200
+    # Set proportional column widths using flex (minWidth sets pixel floor)
+    column_defs[table_config["title_column"]]["flex"] = 3
+    column_defs[table_config["title_column"]]["minWidth"] = 200
+    column_defs[table_config["external_link_column"]]["flex"] = 1
+    column_defs[table_config["external_link_column"]]["minWidth"] = 100
 
-    # Set width for metric columns
+    # Set proportional width for metric columns
     for metric in table_config["metrics"]:
-        column_defs[metric]["width"] = 100
+        column_defs[metric]["flex"] = 1
+        column_defs[metric]["minWidth"] = 100
 
     # Disable pagination
     grid_options["pagination"] = True
@@ -233,11 +219,6 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
 
     # Prevent column reordering
     grid_options["suppressMovableColumns"] = True
-
-    # Enable auto-sizing on second+ tabs
-    # NB: This is to get around an issue with streamlit-aggrid, with autosizing not working for tabs bar the first (https://github.com/PablocFonseca/streamlit-aggrid/issues/249)
-    if tab_index > 0:
-        grid_options["autoSizeStrategy"] = "SizeColumnsToFitProvidedWidthStrategy"
 
     # Add row numbers to show index
     grid_options["rowClassRules"] = {
@@ -249,14 +230,16 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         "headerName": "#",
         "field": "index",
         "valueGetter": "node.rowIndex + 1",
-        "width": 50,
+        "width": 47.5,
         "pinned": "left",
         "suppressMenu": True,
         "sortable": False,
-        "filter": False,
         "cellClass": "text-center"
     }
     grid_options["columnDefs"].insert(0, index_column)
+
+    for col in column_defs.values():
+        col["filter"] = False
 
     # Create theme with background color if specified
     theme_params = AG_GRID_THEME_DEFAULTS.copy()
@@ -266,7 +249,7 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
     # Create the AgGrid table
     AgGrid(
         df,
-        key=f"ag_{table_config['content_type']}_{table_config['sql_script'].replace('.sql', '')}_{tab_index}",
+        key=f"ag_{table_config['content_type']}_{table_config['sql_script'].replace('.sql', '')}",
         license_key=os.environ["AG_GRID_LICENCE_KEY"],
         enable_enterprise_modules="enterpriseOnly",
         gridOptions=grid_options,
@@ -274,9 +257,6 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
         theme=StAggridTheme(base=AG_GRID_THEME_BASE).withParams(**theme_params),
         height=500,
     )
-
-    if sort_column == "Download rate (pages downloadable from)*":
-        st.warning(NOTES["download_rate_note"]["text"])
 
     if "notes" in table_config:
         for note in table_config["notes"]:
@@ -290,48 +270,23 @@ def create_table(table_config, tab_index, page_filter, start_date, end_date, con
                 st.success(note["text"])
 
 
-for tab_index, (tab_name, tables) in enumerate(TAB_CONFIG.items()):
-    with tabs[tab_index]:
+for i in range(0, len(TABLE_CONFIG), 2):
+    # Emit any full-width header before opening columns
+    first_table = TABLE_CONFIG[i]
+    if "section_header" in first_table:
+        st.header(first_table["section_header"])
 
-        # Group tables by their width to handle layout
-        full_width_tables = [table for table in tables if table.get("width") == "full"]
-        half_width_tables = [table for table in tables if table.get("width") == "half"]
+    columns = st.columns(2)
 
-        # Process full-width tables first
-        for table_config in full_width_tables:
-            st.subheader(table_config["display_name"])
-            st.write("_Download figures for publications, plus page view figures for the pages from which they are downloadable_")
+    # Process up to two tables in this row
+    for col_idx in range(2):
+        table_idx = i + col_idx
+        if table_idx < len(TABLE_CONFIG):
+            table_config = TABLE_CONFIG[table_idx]
 
-            # Add order by selectbox for publications table
-            if table_config["content_type"] == "Publication":
-                order_by_options = [
-                    "Page views (pages downloadable from)",
-                    "Downloads",
-                    "Download rate (pages downloadable from)*"
-                ]
-                col1, col2 = st.columns([1, 3])
-
-                with col1:
-                    sort_column = st.selectbox(
-                        label="Top 10 by",
-                        options=order_by_options,
-                        index=1,
-                        key=f"order_by_{table_config['content_type']}_{tab_index}"
-                    )
-                create_table(table_config, tab_index, page_filter, start_date, end_date, connection, sort_column)
-            else:
-                create_table(table_config, tab_index, page_filter, start_date, end_date, connection)
-
-        # Process half-width tables in pairs
-        for i in range(0, len(half_width_tables), 2):
-            columns = st.columns(2)
-
-            # Process up to 2 tables in this row
-            for col_idx in range(2):
-                table_idx = i + col_idx
-                if table_idx < len(half_width_tables):
-                    table_config = half_width_tables[table_idx]
-
-                    with columns[col_idx]:
-                        st.subheader(table_config["display_name"])
-                        create_table(table_config, tab_index, page_filter, start_date, end_date, connection)
+            with columns[col_idx]:
+                title_fn = st.subheader if table_config.get("title_as_subheader") else st.header
+                title_fn(table_config["title"])
+                if "description" in table_config:
+                    st.write(f"_{table_config['description']}_")
+                create_table(table_config, page_filter, start_date, end_date, connection)

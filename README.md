@@ -1,4 +1,5 @@
 # IfG data app
+The IfG's data app, built in Streamlit.
 
 ## Development
 Three branches exist:
@@ -89,6 +90,7 @@ The following environment variables are used by the app:
 - `ODBC_AUTHENTICATION`: Authentication type to be used in database connection
 - `AZURE_CLIENT_ID`: Username to be used in database connection
 - `AZURE_CLIENT_SECRET`: Password to be used in database connection
+- `AG_GRID_LICENCE_KEY`: Licence key for AG Grid, to be used in `streamlit-aggrid`
 - `DS_CONTACT_EMAIL_ADDRESS`: Email address to be used for contacting the data science team
 - `IFG_WEB_ISSUES_FILE_LINK`: Link to document where web issues are logged
 
@@ -108,3 +110,6 @@ NB: Note the use of `--` before the addition of these command line arguments. Th
 
 ## Licences
 An AG Grid licence is held in order to make use of all [`streamlit-aggrid` features](https://github.com/PablocFonseca/streamlit-aggrid). The license is perpetual - i.e. no need for renewal.
+
+## Relationships with other repos
+- [ifg_analytics](https://github.com/instituteforgov/ifg_analytics): The app makes use of data from the `ifg_analytics` repo, which is where web analytics data is extracted, transformed and loaded to our database. The app pulls this data in from the database.

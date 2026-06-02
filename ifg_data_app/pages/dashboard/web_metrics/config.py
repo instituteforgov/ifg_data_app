@@ -47,8 +47,8 @@ DOWNLOAD_METRICS_RAW = [
     "Page views (pages downloadable from)",
     "Downloads",
 ]
-METRICS_PUBLICATIONS = [
-    "Publication title",
+METRICS_FILES = [
+    "File title",
     "File name",
     "Link",
     "File type",

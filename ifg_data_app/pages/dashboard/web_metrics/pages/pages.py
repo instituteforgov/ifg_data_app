@@ -46,23 +46,26 @@ date_range_option, start_date, end_date = elements.draw_date_range_inputs(
 with open("ifg_data_app/sql/dashboard/web_metrics/pages.sql", "r") as file:
     script = file.read()
 
-df = elements.load_data(
-    script,
+script_by_day = script.split(";")[0]
+df_by_day = elements.load_data(
+    script_by_day,
     connection,
-    (start_date, end_date),
+    (
+        start_date, end_date,  # page_views_agg
+        start_date, end_date,  # downloads_agg
+        start_date, end_date,  # where clause
+    ),
+)
+
+script_by_page = script.split(";")[1]
+df_by_page = elements.load_data(
+    script_by_page,
+    connection,
+    (start_date, end_date, start_date, end_date),
 )
 
 # EDIT DATA
-df_by_day = df[["Date"] + METRICS_RAW].groupby("Date").sum().reset_index()
 df_by_day = elements.fill_missing_dates(df_by_day, start_date, end_date, "Date", METRICS_RAW)
-df_by_day = elements.calculate_derived_metrics(df_by_day, METRIC_CALCULATIONS)
-
-df_by_page = elements.group_df(
-    df=df[config.METRICS_PAGES + METRICS_RAW],
-    group_by=config.METRICS_PAGES,
-)
-
-df_by_page = elements.calculate_derived_metrics(df_by_page, METRIC_CALCULATIONS)
 
 df_by_page = df_by_page[config.METRICS_PAGES + list(METRICS_DISPLAY.keys())]
 

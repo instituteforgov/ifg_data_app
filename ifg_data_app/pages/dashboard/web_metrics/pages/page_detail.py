@@ -73,7 +73,7 @@ for date_col in ["Published date", "Updated date"]:
         df_content_metadata[date_col]
     ).dt.strftime("%d %B %Y")
 
-df_content_metadata = df_content_metadata.fillna("")
+df_content_metadata = df_content_metadata.fillna("").infer_objects(copy=False)
 
 st.markdown(
     df_content_metadata[content_metadata].T.reset_index().style.set_table_styles([
@@ -111,7 +111,6 @@ df_metrics = elements.load_data(
 
 # EDIT DATA
 df_metrics = elements.fill_missing_dates(df_metrics, start_date, end_date, "Date", METRICS_RAW)
-df_metrics = elements.calculate_derived_metrics(df_metrics, METRIC_CALCULATIONS)
 
 df_metrics = df_metrics[
     ["Date"] + list(METRICS_DISPLAY.keys())

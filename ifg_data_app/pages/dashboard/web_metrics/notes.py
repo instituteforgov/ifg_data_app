@@ -5,7 +5,7 @@ NOTES = {
     },
     "downloads_note": {
         "type": "warning",
-        "text": "NB: Downloads doesn't include instances where someone directly accesses a file via a URL. See the FAQs for further details."
+        "text": "NB: Downloads doesn't include instances where someone directly accesses a file via a URL. See the Help page for further details."
     },
     "download_rate_note": {
         "type": "warning",
@@ -14,10 +14,6 @@ NOTES = {
     "comment_live_blog_page_views_note": {
         "type": "error",
         "text": "NB: Some live blogs are currently recording unusually high page views. We are investigating why this is the case."
-    },
-    "event_page_views_note": {
-        "type": "warning",
-        "text": "NB: The dashboard currently only includes web traffic metrics. Event metrics (e.g. in-person attendance, live-streams) may be added in future - see the Roadmap for further details."
     },
     "chart_blanks_note": {
         "type": "warning",

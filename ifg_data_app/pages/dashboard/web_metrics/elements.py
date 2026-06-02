@@ -110,7 +110,7 @@ def create_internal_link(
     Args:
         column_defs: Dictionary of column definitions
         column: Column name to apply the link to
-        page_type: Type of page ('page' or 'publication')
+        page_type: Type of page ('page' or 'file')
         url_column: Name of the column containing the URL (default: 'Link')
 
     Returns:
@@ -120,8 +120,8 @@ def create_internal_link(
     # Determine URL path based on page type
     if page_type == "page":
         url_path = "/web_metrics_page_detail"
-    elif page_type == "publication":
-        url_path = "/web_metrics_publication_detail"
+    elif page_type == "file":
+        url_path = "/web_metrics_file_detail"
 
     column_defs[column]["cellRenderer"] = JsCode(f"""
         class UrlCellRenderer {{
@@ -142,6 +142,61 @@ def create_internal_link(
                     );
                     this.eGui.setAttribute("style", "text-decoration:none; color:{COLOURS['pink']};");
                     this.eGui.setAttribute("target", "_blank");
+                }}
+            }}
+            getGui() {{
+                return this.eGui;
+            }}
+        }}
+    """)
+    return column_defs
+
+
+def create_internal_link_with_suffix(
+    column_defs: dict,
+    column: str,
+    page_type: str,
+    suffix_column: str,
+    url_column: str = "Link"
+) -> dict:
+    """Create internal link column with a plain-text suffix appended from another column.
+
+    Args:
+        column_defs: Dictionary of column definitions
+        column: Column name to apply the link to
+        page_type: Type of page ('page' or 'file')
+        suffix_column: Name of the column whose value is appended in brackets after the link
+        url_column: Name of the column containing the URL (default: 'Link')
+
+    Returns:
+        Updated column definitions dictionary
+    """
+
+    if page_type == "page":
+        url_path = "/web_metrics_page_detail"
+    elif page_type == "file":
+        url_path = "/web_metrics_file_detail"
+
+    column_defs[column]["cellRenderer"] = JsCode(f"""
+        class UrlCellRenderer {{
+            init(params) {{
+                this.eGui = document.createElement("span");
+                if (!params.value || params.value === '' || params.value === 'Total') {{
+                    this.eGui.innerText = params.value || "";
+                }} else if (!params.data.{url_column} || params.data.{url_column} === '') {{
+                    this.eGui.innerText = params.value;
+                }} else {{
+                    const link = document.createElement("a");
+                    link.innerText = params.value;
+                    link.setAttribute("href", "{url_path}?url=" + params.data.{url_column});
+                    link.setAttribute("style", "text-decoration:none; color:{COLOURS['pink']};");
+                    link.setAttribute("target", "_blank");
+                    this.eGui.appendChild(link);
+                    if (params.data['{suffix_column}'] && params.data['{suffix_column}'] !== '') {{
+                        const suffix = document.createElement("span");
+                        suffix.innerText = " (" + params.data['{suffix_column}'] + ")";
+                        this.eGui.appendChild(suffix);
+                    }}
                 }}
             }}
             getGui() {{
@@ -914,6 +969,6 @@ def fill_missing_dates(
     # Fill missing values with zeros for specified columns
     for col in fill_columns:
         if col in result_df.columns:
-            result_df[col] = result_df[col].fillna(0)
+            result_df[col] = result_df[col].fillna(0).infer_objects(copy=False)
 
     return result_df
