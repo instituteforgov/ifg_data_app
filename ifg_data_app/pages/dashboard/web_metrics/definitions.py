@@ -11,7 +11,6 @@ DEFINITIONS = {
     "Team": "The IfG team responsible for the content",
     "Author": "The author(s) of the content",
     "Topic": "The policy area or subject matter covered",
-    "Pages": "The number of distinct pages included in the data",
     "Page views": "The number of times the page is loaded ",
     "Page views (pages downloadable from)": "The number of times the page is loaded for all pages the file has been downloaded from within the selected date range",
     "Active users": "The number of unique users who have interacted with the site",

@@ -41,11 +41,6 @@ pg = st.navigation(
                 url_path="/web_metrics_home",
             ),
             st.Page(
-                "ifg_data_app/pages/dashboard/web_metrics/pages/summary.py",
-                title="Summary",
-                url_path="/web_metrics_summary",
-            ),
-            st.Page(
                 "ifg_data_app/pages/dashboard/web_metrics/pages/files.py",
                 title="Files (e.g. PDFs)",
                 url_path="/web_metrics_files",
@@ -83,11 +78,6 @@ pg = st.navigation(
 # Hide pages in sidebar
 st.markdown(
     """
-        <style>
-            a[href$="web_metrics_summary"] {
-                display: none;
-            }
-        </style>
         <style>
             a[href$="web_metrics_page_detail"] {
                 display: none;
