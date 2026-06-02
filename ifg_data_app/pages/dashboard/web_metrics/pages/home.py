@@ -27,7 +27,7 @@ TABLE_CONFIG = [
     {
         "title": "Downloads",
         "title_as_subheader": True,
-        "description": "Publications available as PDFs. Page views are aggregated across all pages the PDF is downloadable from",
+        "description": "Publications available as PDFs. Page views are aggregated across all pages the PDF has been downloaded from",
         "content_type": "Publication",
         "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_downloads.sql",
         "metrics": {

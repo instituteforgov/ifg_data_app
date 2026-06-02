@@ -13,11 +13,11 @@ DEFINITIONS = {
     "Topic": "The policy area or subject matter covered",
     "Pages": "The number of distinct pages included in the data",
     "Page views": "The number of times the page is loaded ",
-    "Page views (pages downloadable from)": "The number of times the page is loaded for all pages the file is available from",
+    "Page views (pages downloadable from)": "The number of times the page is loaded for all pages the file has been downloaded from within the selected date range",
     "Active users": "The number of unique users who have interacted with the site",
     "Page views per active user": "The average number of pages viewed by each active user",
     "Average engagement time per active user": "The (mean) average time spent on the site by each active user",
     "Downloads": "The number of times a file has been downloaded",
     "Download rate": "Downloads as a percentage of page views",
-    "Download rate (pages downloadable from)": "Downloads as a percentage of page views for all pages the file is available from",
+    "Download rate (pages downloadable from)": "Downloads as a percentage of page views for all pages the file has been downloaded from within the selected date range",
 }
