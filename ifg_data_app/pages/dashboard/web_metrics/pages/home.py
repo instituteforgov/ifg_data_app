@@ -32,7 +32,7 @@ TABLE_CONFIG = [
     {
         "title": "Page views",
         "title_as_subheader": True,
-        "description": "Publications available in HTML format. Page views are disaggregated by page",
+        "description": "Publications available in HTML form. Page views are disaggregated by page",
         "content_type": "Publication",
         "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
         "metrics": {"Page views": format_integer},
