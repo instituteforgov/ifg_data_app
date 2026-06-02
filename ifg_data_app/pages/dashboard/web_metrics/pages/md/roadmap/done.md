@@ -1,3 +1,6 @@
+### v1.2.2 - Tu 2 June 2026
+🪰 **DATA: Bugfix: Home page being reported as an explainer**
+
 ### v1.2.1 - Wed 11 Mar 2026
 🪳 **DATA: Bugfix: In rare cases publications weren't eligible to appear in home page**\
 Publications where the file name contained the string 'briefing' were erroneously excluded
