@@ -13,6 +13,18 @@ from ifg_data_app.pages.dashboard.web_metrics.utils import format_integer, forma
 TABLE_CONFIG = [
     {
         "section_header": "Publications",
+        "title": "Page views",
+        "title_as_subheader": True,
+        "description": "Publications available in HTML form. Page views are disaggregated by page",
+        "content_type": "Publication",
+        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
+        "metrics": {"Page views": format_integer},
+        "title_column": "Page title",
+        "internal_link_type": "page",
+        "external_link_column": "Link",
+        "external_link_text": "View page ⮺",
+    },
+    {
         "title": "Downloads",
         "title_as_subheader": True,
         "description": "Publications available as PDFs. Page views are aggregated across all pages the PDF is downloadable from",
@@ -28,18 +40,6 @@ TABLE_CONFIG = [
         "external_link_column": "Link",
         "external_link_text": "View pub... ⮺",
         "notes": [NOTES["downloads_note"]],
-    },
-    {
-        "title": "Page views",
-        "title_as_subheader": True,
-        "description": "Publications available in HTML form. Page views are disaggregated by page",
-        "content_type": "Publication",
-        "sql_script": "ifg_data_app/sql/dashboard/web_metrics/home_page_views.sql",
-        "metrics": {"Page views": format_integer},
-        "title_column": "Page title",
-        "internal_link_type": "page",
-        "external_link_column": "Link",
-        "external_link_text": "View page ⮺",
     },
     {
         "title": "Comment and live blog page views",
