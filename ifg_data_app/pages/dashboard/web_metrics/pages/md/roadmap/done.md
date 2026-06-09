@@ -82,7 +82,7 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 ### v0.4.0 - Mon 14 July 2025
 🐜 **DATA: Bugfix that meant some pages showed with a missing page title**
 
-📉 **UI: Bugfixs in 'Page detail' page line charts**\
+📉 **UI: Bugfixes in 'Page detail' page line charts**\
 Ensures axis ranges are always fixed and only data for the last 48 hours is marked as provisional
 
 ### v0.3.0 - Fri 11 July 2025
