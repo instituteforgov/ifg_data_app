@@ -970,6 +970,6 @@ def fill_missing_dates(
     # Fill missing values with zeros for specified columns
     for col in fill_columns:
         if col in result_df.columns:
-            result_df[col] = result_df[col].fillna(0).infer_objects(copy=False)
+            result_df[col] = result_df[col].fillna(0).infer_objects()
 
     return result_df

@@ -73,7 +73,7 @@ for date_col in ["Published date", "Updated date"]:
         df_content_metadata[date_col]
     ).dt.strftime("%d %B %Y")
 
-df_content_metadata = df_content_metadata.fillna("").infer_objects(copy=False)
+df_content_metadata = df_content_metadata.fillna("").infer_objects()
 
 st.markdown(
     df_content_metadata[content_metadata].T.reset_index().style.set_table_styles([
@@ -180,7 +180,7 @@ with tab2:
     if "Downloads" not in df_downloadable_pages.columns:
         df_downloadable_pages["Downloads"] = 0
     else:
-        df_downloadable_pages["Downloads"] = df_downloadable_pages["Downloads"].fillna(0).infer_objects(copy=False)
+        df_downloadable_pages["Downloads"] = df_downloadable_pages["Downloads"].fillna(0).infer_objects()
 
     # Convert dates
     for date_col in ["Published date", "Updated date"]:
