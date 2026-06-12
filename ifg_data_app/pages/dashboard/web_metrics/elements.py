@@ -835,7 +835,7 @@ def draw_line_chart_section(
 
         st.plotly_chart(
             fig,
-            use_container_width=True,
+            width="stretch",
             config={
                 "displayModeBar": False,
                 "displaylogo": False,
