@@ -7,10 +7,6 @@ NOTES = {
         "type": "warning",
         "text": "NB: Downloads doesn't include instances where someone directly accesses a file via a URL. See the Help page for further details."
     },
-    "download_rate_note": {
-        "type": "warning",
-        "text": "*Only includes publications with 25+ downloads in the selected time period."
-    },
     "comment_live_blog_page_views_note": {
         "type": "error",
         "text": "NB: Some live blogs are currently recording unusually high page views. We are investigating why this is the case."
