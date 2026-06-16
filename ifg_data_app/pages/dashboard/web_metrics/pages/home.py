@@ -260,6 +260,9 @@ def create_table(table_config, page_filter, start_date, end_date, connection):
 
     if "notes" in table_config:
         for note in table_config["notes"]:
+            if "display_start" in note and "display_end" in note:
+                if not (start_date <= note["display_end"] and end_date >= note["display_start"]):
+                    continue
             if note["type"] == "warning":
                 st.warning(note["text"])
             elif note["type"] == "info":

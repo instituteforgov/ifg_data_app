@@ -1,3 +1,5 @@
+from datetime import date
+
 NOTES = {
     "line_chart_all_content_note": {
         "type": "warning",
@@ -9,7 +11,15 @@ NOTES = {
     },
     "comment_live_blog_page_views_note": {
         "type": "error",
-        "text": "NB: Some live blogs are currently recording unusually high page views. We are investigating why this is the case."
+        "text": "NB: Between late October 2025 and mid-May 2026, some live blogs recorded unusually high page views. As a future development we will strip this traffic out, but for now it should be disregarded.",
+        "display_start": date(2025, 10, 26),
+        "display_end": date(2026, 5, 19),
+        "pages": {
+            "/live-blog/autumn-budget-2025",
+            "/live-blog/general-election-2024",
+            "/live-blog/cabinet-reshuffle-november-2023",
+            "/live-blog/covid-public-inquiry",
+        },
     },
     "chart_blanks_note": {
         "type": "warning",

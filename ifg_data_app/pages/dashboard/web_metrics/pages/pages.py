@@ -136,4 +136,8 @@ AgGrid(
     height=elements.calculate_ag_grid_height(len(df_by_page)),
 )
 
+note = NOTES["comment_live_blog_page_views_note"]
+if start_date <= note["display_end"] and end_date >= note["display_start"]:
+    st.error(note["text"])
+
 st.warning(NOTES["downloads_note"]["text"])

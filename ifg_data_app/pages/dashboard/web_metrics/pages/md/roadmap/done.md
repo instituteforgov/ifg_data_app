@@ -1,3 +1,6 @@
+### v1.2.3 - Tu 16 June 2026
+⚠️ **UI: Update warning about phantom live blog traffic**
+
 ### v1.2.2 - Tu 2 June 2026
 🪰 **DATA: Bugfix: Home page being reported as an explainer**
 
@@ -47,7 +50,7 @@ Fix makes those deleted or changed to a new URL eligible for inclusion
 
 🔄️ **UI: Reorder pages in sidebar**
 
-📄 **UI: Add details of all pages a publication is downloadable from to 'Publication details' page**
+📄 **UI: Add details of all pages a publication is downloaded from to 'Publication details' page**
 
 🧹 **UI: Remove unused 'Publication details' and 'Page details' tabs ('Traffic sources', 'Search term')**
 

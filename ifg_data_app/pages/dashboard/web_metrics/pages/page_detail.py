@@ -7,6 +7,7 @@ from st_aggrid import AgGrid, JsCode, StAggridTheme
 from ifg_data_app.config.ag_grid_theme import AG_GRID_THEME_BASE, AG_GRID_THEME_DEFAULTS
 import ifg_data_app.pages.dashboard.web_metrics.config as config
 import ifg_data_app.pages.dashboard.web_metrics.elements as elements
+from ifg_data_app.pages.dashboard.web_metrics.notes import NOTES
 from ifg_data_app.pages.dashboard.web_metrics.utils import set_metrics
 
 # HANDLE DIRECT ACCESS
@@ -164,3 +165,8 @@ AgGrid(
     theme=StAggridTheme(base=AG_GRID_THEME_BASE).withParams(**AG_GRID_THEME_DEFAULTS),
     height=elements.calculate_ag_grid_height(len(df_metrics)),
 )
+
+note = NOTES["comment_live_blog_page_views_note"]
+if st.query_params["url"] in note["pages"]:
+    if start_date <= note["display_end"] and end_date >= note["display_start"]:
+        st.error(note["text"])
